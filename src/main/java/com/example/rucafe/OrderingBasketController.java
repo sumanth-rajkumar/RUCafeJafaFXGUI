@@ -1,13 +1,16 @@
 package com.example.rucafe;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * This class is what controls all the actions for each button using the inputs given by the
@@ -157,14 +160,17 @@ public class OrderingBasketController {
             alert.showAndWait();
             return;
         }
-        Order existingOrder = order;
-        items.getSelectionModel().selectFirst();
-        storeOrdersController.placeOrder(existingOrder);
-        resetOrder();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Place order");
         alert.setTitle("Confirmation");
         alert.setContentText("Order placed.");
-        alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK)
+        {
+            Order existingOrder = order;
+            items.getSelectionModel().selectFirst();
+            storeOrdersController.placeOrder(existingOrder);
+            resetOrder();
+        }
     }
 }
