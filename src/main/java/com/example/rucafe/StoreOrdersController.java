@@ -28,6 +28,7 @@ public class StoreOrdersController {
 
     /**
      * It will add the order items with its specific order number to ListView in store GUI based on user input
+     * @param order - order item to be placed in store ListView
      */
     public void placeOrder(Order order)
     {
@@ -81,6 +82,7 @@ public class StoreOrdersController {
     /**
      * This method corresponds to the Export Orders button of the GUI
      * It will write all info of each order for each order number to a txt file
+     * @throws IOException - exception
      */
     @FXML
     public void exportToFile() throws IOException

@@ -89,6 +89,9 @@ public class MainController {
 
     /**
      * Sets the stage with scene that takes in FXMLLoader
+     * @throws IOException - exception
+     * @param loader - location
+     * @return - Stage of each window
      */
     private Stage initializeStage(FXMLLoader loader) throws IOException
     {
@@ -101,6 +104,7 @@ public class MainController {
 
     /**
      * Shares data between all GUI controllers
+     * @throws IOException - exception
      */
     @FXML
     public void initialize() throws IOException

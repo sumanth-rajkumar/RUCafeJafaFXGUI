@@ -20,6 +20,7 @@ public class StoreOrders implements Customizable {
     /**
      * Writes all order info to the passed in file
      * @param file - file that all order info will be written to
+     * @throws IOException - exception
      */
     public void exportToFile(File file) throws IOException
     {

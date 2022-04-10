@@ -25,6 +25,7 @@ public class Order implements Customizable {
     /**
      * Constructor that creates a Donut object based off the given list.
      * It assigns the proper value to the instance variable list
+     * @param list - Arraylist that is passed to this class's ArrayList
      */
     public Order(ArrayList<MenuItem> list) {
         this.list = list;
