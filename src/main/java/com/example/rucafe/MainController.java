@@ -1,84 +1,128 @@
 package com.example.rucafe;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 
+/**
+ * This class is the Main GUI that has the buttons that lead to all the other GUIs
+ * @author Sumanth Rajkumar, Shantanu Jain
+ */
 public class MainController {
 
-    @FXML
-    private Button orderingCoffee;
 
-    @FXML
-    private Button orderingDonuts;
 
+    /**
+     * This method corresponds to the Order coffee button of the GUI
+     * It will open up the orderingCoffee GUI
+     */
     @FXML
-    private Button storeOrders;
+    void goToCoffeeWindow()
+    {
+        coffeeStage.show();
+        basketStage.hide();
+        storeStage.hide();
+        donutsStage.hide();
 
-    @FXML
-    private Button yourOrder;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
-    @FXML
-    void goToCoffeeWindow(ActionEvent event) throws IOException {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderingCoffeeView.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
+    /**
+     * This method corresponds to the Order donuts button of the GUI
+     * It will open up the orderingDonuts GUI
+     */
     @FXML
-    void goToDonutWindow(ActionEvent event) throws IOException {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderingDonutsView.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+    void goToDonutWindow()
+    {
+        donutsStage.show();
+        basketStage.hide();
+        storeStage.hide();
+        coffeeStage.hide();
+
     }
 
+    /**
+     * This method corresponds to the store orders button of the GUI
+     * It will open up the storeOrders GUI
+     */
     @FXML
-    void goToStoreOrderWindow(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StoreOrdersView.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+    void goToStoreOrderWindow()
+    {
+        storeStage.show();
+        basketStage.hide();
+        coffeeStage.hide();
+        donutsStage.hide();
     }
 
+    /**
+     * This method corresponds to the your orders button of the GUI
+     * It will open up the orderingBasket GUI
+     */
     @FXML
-    void goToYourOrderWindow(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OrderingBasketView.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+    void goToYourOrderWindow()
+    {
+        basketStage.show();
+        coffeeStage.hide();
+        donutsStage.hide();
+        storeStage.hide();
     }
+
+    FXMLLoader donutLoader = new FXMLLoader(getClass().getResource("OrderingDonutsView.fxml"));
+    FXMLLoader basketLoader = new FXMLLoader(getClass().getResource("OrderingBasketView.fxml"));
+    FXMLLoader coffeeLoader = new FXMLLoader(getClass().getResource("OrderingCoffeeView.fxml"));
+    FXMLLoader storeLoader = new FXMLLoader(getClass().getResource("StoreOrdersView.fxml"));
+
+
+    Stage donutsStage;
+    Stage basketStage;
+    Stage coffeeStage;
+    Stage storeStage;
+
+
+    OrderingDonutsController donutsController;
+    OrderingBasketController basketController;
+    OrderingCoffeeController coffeeController;
+    StoreOrdersController storeController;
+
+    /**
+     * Sets the stage with scene that takes in FXMLLoader
+     */
+    private Stage initializeStage(FXMLLoader loader) throws IOException
+    {
+        Parent root1 = (Parent) loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        return stage;
+    }
+
+
+    /**
+     * Shares data between all GUI controllers
+     */
+    @FXML
+    public void initialize() throws IOException
+    {
+
+        donutsStage = initializeStage(donutLoader);
+
+        donutsController = donutLoader.getController();
+
+        basketStage = initializeStage(basketLoader);
+        basketController = basketLoader.getController();
+
+        coffeeStage = initializeStage(coffeeLoader);
+        coffeeController = coffeeLoader.getController();
+
+
+        storeStage = initializeStage(storeLoader);
+        storeController = storeLoader.getController();
+
+        donutsController.setBasketController(basketController);
+        coffeeController.setBasketController(basketController);
+        basketController.setStoreOrdersController(storeController, donutsController, coffeeController);
+    }
+
 }

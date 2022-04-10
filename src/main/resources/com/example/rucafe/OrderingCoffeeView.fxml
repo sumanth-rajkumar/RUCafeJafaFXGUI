@@ -4,12 +4,12 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="443.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rucafe.OrderingCoffeeController">
    <children>
@@ -20,17 +20,18 @@
       </Label>
       <ImageView fitHeight="127.0" fitWidth="141.0" layoutX="231.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../download%20(1).jpg" />
+            <Image url="@../../../coffee.jpg" />
          </image>
       </ImageView>
-      <CheckBox layoutX="58.0" layoutY="254.0" mnemonicParsing="false" text="Cream" />
-      <CheckBox layoutX="195.0" layoutY="254.0" mnemonicParsing="false" text="Syrup" />
-      <CheckBox layoutX="58.0" layoutY="328.0" mnemonicParsing="false" text="Whipped Cream" />
-      <CheckBox layoutX="58.0" layoutY="290.0" mnemonicParsing="false" text="Milk" />
-      <CheckBox layoutX="195.0" layoutY="290.0" mnemonicParsing="false" text="Caramel" />
-      <ComboBox layoutX="370.0" layoutY="250.0" prefWidth="150.0" promptText="Size" />
-      <ComboBox layoutX="370.0" layoutY="286.0" prefWidth="150.0" promptText="quantity" />
-      <Button layoutX="404.0" layoutY="379.0" mnemonicParsing="false" text="add to order" />
-      <TextArea layoutX="361.0" layoutY="327.0" prefHeight="37.0" prefWidth="185.0" promptText="\$0.00" />
+      <CheckBox fx:id="cream" layoutX="58.0" layoutY="254.0" mnemonicParsing="false" onAction="#refreshAddIns" text="Cream" />
+      <CheckBox fx:id="syrup" layoutX="195.0" layoutY="254.0" mnemonicParsing="false" onAction="#refreshAddIns" text="Syrup" />
+      <CheckBox fx:id="whippedCream" layoutX="58.0" layoutY="328.0" mnemonicParsing="false" onAction="#refreshAddIns" text="Whipped Cream" />
+      <CheckBox fx:id="milk" layoutX="58.0" layoutY="290.0" mnemonicParsing="false" onAction="#refreshAddIns" text="Milk" />
+      <CheckBox fx:id="caramel" layoutX="195.0" layoutY="290.0" mnemonicParsing="false" onAction="#refreshAddIns" text="Caramel" />
+      <ComboBox fx:id="sizes" layoutX="370.0" layoutY="250.0" onAction="#selectSize" prefWidth="150.0" promptText="Size" />
+      <ComboBox fx:id="quantity" layoutX="370.0" layoutY="286.0" onAction="#selectQuantity" prefWidth="150.0" promptText="quantity" />
+      <Button layoutX="404.0" layoutY="379.0" mnemonicParsing="false" onAction="#addToList" text="add to order" />
+      <TextField fx:id="subTotal" layoutX="371.0" layoutY="333.0" />
+      <Text layoutX="314.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub-total" />
    </children>
 </AnchorPane>
