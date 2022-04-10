@@ -22,6 +22,15 @@ public class Order implements Customizable {
         this.list = new ArrayList<>();
     }
 
+    int orderNumber;
+
+    public void setOrderNumber(int n){
+        this.orderNumber=n;
+    }
+
+    public int getOrderNumber(){
+        return orderNumber;
+    }
     /**
      * Constructor that creates a Donut object based off the given list.
      * It assigns the proper value to the instance variable list

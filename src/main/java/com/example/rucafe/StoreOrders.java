@@ -86,6 +86,7 @@ public class StoreOrders implements Customizable {
             Order order = (Order) obj;
             lastOrderNumber++;
             orders.put(lastOrderNumber,order);
+            order.setOrderNumber(lastOrderNumber);
             return true;
         }
         return false;

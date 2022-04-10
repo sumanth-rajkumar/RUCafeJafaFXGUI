@@ -33,7 +33,7 @@ public class StoreOrdersController {
     public void placeOrder(Order order)
     {
         store.add(order);
-        int orderNumber = store.getOrderSize();
+        int orderNumber = order.getOrderNumber();
         ordersDropDown.getItems().add(orderNumber);
         ordersDropDown.setValue(orderNumber);
         onOrderSelection();
@@ -49,11 +49,15 @@ public class StoreOrdersController {
         Integer orderNumber = ordersDropDown.getValue();
         orders.getItems().clear();
         total.setText("");
+        Order order = null;
         if(orderNumber!=null) {
-            Order order = store.getOrder(orderNumber);
-            orders.getItems().addAll(order.getOrderItems());
-            total.setText(String.format("%1$.2f", order.getTotal()));
+            order = store.getOrder(orderNumber);
+            if(order!=null){
+                orders.getItems().addAll(order.getOrderItems());
+                total.setText(String.format("%1$.2f", order.getTotal()));
+            }
         }
+
     }
 
     /**
