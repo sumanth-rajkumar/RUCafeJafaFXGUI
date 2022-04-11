@@ -50,9 +50,11 @@ public class StoreOrdersController {
         orders.getItems().clear();
         total.setText("");
         Order order = null;
-        if(orderNumber!=null) {
+        if(orderNumber != null)
+        {
             order = store.getOrder(orderNumber);
-            if(order!=null){
+            if(order!=null)
+            {
                 orders.getItems().addAll(order.getOrderItems());
                 total.setText(String.format("%1$.2f", order.getTotal()));
             }

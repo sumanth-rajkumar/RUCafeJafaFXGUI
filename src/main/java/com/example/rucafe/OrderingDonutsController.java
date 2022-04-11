@@ -126,11 +126,10 @@ public class OrderingDonutsController {
      */
     private Donut getSelectedMenuItem()
     {
-        if( this.donutFlavors.getSelectionModel().isEmpty())
+        if(this.donutFlavors.getSelectionModel().isEmpty())
         {
             return null;
         }
-
         Donut donut = new Donut(
             Integer.parseInt(quantity.getSelectionModel().getSelectedItem()),
             this.donutTypes.getSelectionModel().getSelectedItem(),
@@ -231,12 +230,12 @@ public class OrderingDonutsController {
     @FXML
     void addToChoice()
     {
-
         Donut removeItem = orderFlavors.getSelectionModel().getSelectedItem();
-        if(removeItem==null) return;
+        if(removeItem == null) return;
         orderFlavors.getItems().remove(removeItem);
         String currentDonutType = donutTypes.getValue();
-        if(removeItem.getDonutType().equals(currentDonutType)) {
+        if(removeItem.getDonutType().equals(currentDonutType))
+        {
             donutFlavors.getItems().add(removeItem.getDonutFlavor());
         }
         refreshOrderTotal();
@@ -251,8 +250,7 @@ public class OrderingDonutsController {
     {
 
         Donut donut = getSelectedMenuItem();
-        if(donut==null) return;
-
+        if(donut == null) return;
         donutFlavors.getItems().remove(donut.getDonutFlavor());
         orderFlavors.getItems().add(donut);
         refreshOrderTotal();
@@ -269,12 +267,10 @@ public class OrderingDonutsController {
         donutTypes.setItems(donutList());
         donutTypes.setValue("yeast donut");
         donutFlavors.setItems(listOfFlavorsForYeast());
-        //donutFlavors.getSelectionModel().selectFirst();
         Image image = new Image("yeast.jpg");
         donutImage.setImage(image);
         quantity.setItems(quantityList());
         quantity.setValue("1");
-
         this.subTotal.setText("");
     }
 

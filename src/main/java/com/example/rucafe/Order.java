@@ -24,19 +24,31 @@ public class Order implements Customizable {
 
     int orderNumber;
 
-    public void setOrderNumber(int n){
-        this.orderNumber=n;
+    /**
+     * Sets an order's unique number based off passed in number
+     * @param number - unique order number to be assigned
+     */
+    public void setOrderNumber(int number)
+    {
+        this.orderNumber = number;
     }
 
-    public int getOrderNumber(){
+    /**
+     * Sets an order's unique number based off passed in number
+     * @return - int representing order's unique number
+     */
+    public int getOrderNumber()
+    {
         return orderNumber;
     }
+
     /**
      * Constructor that creates a Donut object based off the given list.
      * It assigns the proper value to the instance variable list
      * @param list - Arraylist that is passed to this class's ArrayList
      */
-    public Order(ArrayList<MenuItem> list) {
+    public Order(ArrayList<MenuItem> list)
+    {
         this.list = list;
     }
 
